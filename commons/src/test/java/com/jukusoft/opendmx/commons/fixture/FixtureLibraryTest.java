@@ -52,6 +52,11 @@ public class FixtureLibraryTest {
 		//load fixtures again
 		fixtureLibrary.loadAllFixtures();
 		assertEquals(1, fixtureLibrary.countLoadedFixtures());
+
+		//cleanup
+		if (oldFixture.exists()) {
+			oldFixture.delete();
+		}
 	}
 
 }
