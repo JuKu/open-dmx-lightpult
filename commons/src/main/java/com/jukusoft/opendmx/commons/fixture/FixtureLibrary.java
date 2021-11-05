@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +60,42 @@ public class FixtureLibrary {
 	/**
 	 * load all fixtures from fixture directory.
 	 */
-	public void loadAllFixtures() {
-		// TODO: add code here
+	public void loadAllFixtures() throws IOException {
+		this.fixtures.clear();
+
+		Files.find(getFixtureDirPath(),
+						Integer.MAX_VALUE,
+						(filePath, fileAttr) -> fileAttr.isRegularFile() && filePath.endsWith(".fixture"))
+				.forEach(path -> {
+					try {
+						loadFixtureInternal(path);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+	}
+
+	/**
+	 * ,load the fixture from the path and save it into memory.
+	 *
+	 * @param path path to .fixture file
+	 * @throws IOException if file could not be read
+	 */
+	public void loadFixtureInternal(Path path) throws IOException {
+		File file = path.toFile();
+
+		if (!file.exists()) {
+			throw new FileNotFoundException("fixture file does not exists: " + file.getAbsolutePath());
+		}
+
+		FixtureLibEntry fixture = loadFromFile(file);
+		String manufacturer = fixture.getManufacturer();
+
+		if (!this.fixtures.containsKey(manufacturer)) {
+			this.fixtures.put(manufacturer, new ArrayList<>());
+		}
+
+		this.fixtures.get(manufacturer).add(fixture);
 	}
 
 	/**
