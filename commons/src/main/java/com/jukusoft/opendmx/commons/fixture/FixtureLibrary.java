@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  * the fixture library.
@@ -15,7 +18,15 @@ import java.nio.file.Path;
  */
 public class FixtureLibrary {
 
+	/**
+	 * the fixture directory system property key.
+	 */
 	private static final String DIR_PROPERTY_KEY = "fixtureDir";
+
+	/**
+	 * a map with all fixtures (key: manufacturer, value: list with all fixtures of this manufacturers).
+	 */
+	private Map<String, List<FixtureLibEntry>> fixtures = new HashMap<>();
 
 	/**
 	 * save the fixture data of one fixture.
@@ -42,6 +53,13 @@ public class FixtureLibrary {
 
 		FixtureLibEntry fixtureLibEntry = createGson().fromJson(jsonString, FixtureLibEntry.class);
 		return fixtureLibEntry;
+	}
+
+	/**
+	 * load all fixtures from fixture directory.
+	 */
+	public void loadAllFixtures() {
+		// TODO: add code here
 	}
 
 	/**
