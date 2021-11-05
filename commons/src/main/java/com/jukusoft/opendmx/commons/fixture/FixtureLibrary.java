@@ -15,6 +15,8 @@ import java.nio.file.Path;
  */
 public class FixtureLibrary {
 
+	private static final String DIR_PROPERTY_KEY = "fixtureDir";
+
 	/**
 	 * save the fixture data of one fixture.
 	 *
@@ -50,6 +52,28 @@ public class FixtureLibrary {
 	private Gson createGson() {
 		//Gson gson = new Gson();
 		return new GsonBuilder().setPrettyPrinting().create();
+	}
+
+	/**
+	 * get fixture directory with all .fixture files.
+	 *
+	 * @return directory with all fixture files
+	 */
+	private Path getFixtureDirPath() {
+		String dirPath = "data/fixtures";
+
+		if (System.getProperty(DIR_PROPERTY_KEY) != null) {
+			dirPath = System.getProperty(DIR_PROPERTY_KEY);
+		}
+
+		File fixtureDir = new File(dirPath);
+
+		//create directory, if not exists
+		if (!fixtureDir.exists()) {
+			fixtureDir.mkdirs();
+		}
+
+		return fixtureDir.toPath();
 	}
 
 }
