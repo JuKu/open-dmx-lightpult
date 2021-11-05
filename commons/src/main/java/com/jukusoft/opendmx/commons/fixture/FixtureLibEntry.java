@@ -27,17 +27,7 @@ public class FixtureLibEntry {
 	/**
 	 * modes of headlight.
 	 */
-	private Map<String,DMXChannel> modes;
-
-	/**
-	 * the dmx channels.
-	 */
-	private DMXChannel[] dmxChannels;
-
-	/**
-	 * the count of the heads (a headlight can be a multihead, this means it can e.q. has 4 heads).
-	 */
-	private int headCount = 1;
+	private Map<String,FixtureMode> modes;
 
 	// TODO: add palettes
 
@@ -47,13 +37,11 @@ public class FixtureLibEntry {
 	 * @param shortName short name of the headlight.
 	 * @param longName long name of the headlight.
 	 * @param manufacturer manufacturer of the headlight.
-	 * @param dmxChannels count of dmx channels of the headlight.
 	 */
-	public FixtureLibEntry(String shortName, String longName, String manufacturer, int dmxChannels) {
+	public FixtureLibEntry(String shortName, String longName, String manufacturer) {
 		this.shortName = shortName;
 		this.longName = longName;
 		this.manufacturer = manufacturer;
-		this.dmxChannels = new DMXChannel[dmxChannels];
 	}
 
 	public String getShortName() {
@@ -68,8 +56,8 @@ public class FixtureLibEntry {
 		return manufacturer;
 	}
 
-	public DMXChannel[] getDmxChannels() {
-		return dmxChannels;
+	public Map<String, FixtureMode> getModes() {
+		return modes;
 	}
 
 }

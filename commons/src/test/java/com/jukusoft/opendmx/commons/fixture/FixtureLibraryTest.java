@@ -46,7 +46,7 @@ public class FixtureLibraryTest {
 		assertEquals(0, fixtureLibrary.countLoadedFixtures());
 
 		//create new fixture
-		FixtureLibEntry fixture = new FixtureLibEntry("test", "test", "test", 1);
+		FixtureLibEntry fixture = new FixtureLibEntry("test", "test", "test");
 		fixtureLibrary.save(new File(fixtureLibrary.getFixtureDirPath().toFile(), "test.fixture"), fixture);
 
 		//load fixtures again
