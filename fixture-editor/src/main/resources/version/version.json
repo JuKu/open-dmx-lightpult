@@ -1,0 +1,6 @@
+{
+	"version": "${versionName}",
+	"build.number": "${buildNumber}",
+	"build.time": "${maven.build.timestamp}",
+	"git.build.hash": "${versionSCM}"
+}

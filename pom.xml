@@ -17,6 +17,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>commons</module>
+        <module>fixture-editor</module>
     </modules>
 
     <name>open-dmx-lightpult</name>
@@ -30,9 +31,17 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git:/github.com/JuKu/open-dmx-lightpult.git</connection>
+        <developerConnection>scm:git:ssh://github.com/JuKu/open-dmx-lightpult.git</developerConnection>
+        <url>https://github.com/JuKu/open-dmx-lightpult</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
+
+        <javafx.version>17.0.1</javafx.version>
 
         <sonar.language>java</sonar.language>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
