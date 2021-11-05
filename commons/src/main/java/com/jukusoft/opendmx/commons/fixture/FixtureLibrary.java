@@ -2,10 +2,13 @@ package com.jukusoft.opendmx.commons.fixture;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,7 +26,12 @@ public class FixtureLibrary {
 	/**
 	 * the fixture directory system property key.
 	 */
-	private static final String DIR_PROPERTY_KEY = "fixtureDir";
+	public static final String DIR_PROPERTY_KEY = "fixtureDir";
+
+	/**
+	 * the logger.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(FixtureLibrary.class);
 
 	/**
 	 * a map with all fixtures (key: manufacturer, value: list with all fixtures of this manufacturers).
@@ -36,11 +44,14 @@ public class FixtureLibrary {
 	 * @param file the tarhet file
 	 * @param fixture the fixture to save
 	 */
-	public void save(File file, FixtureLibEntry fixture) {
+	public void save(File file, FixtureLibEntry fixture) throws IOException {
+		LOGGER.info("save fixture file: {}", file.getAbsolutePath());
+
 		//Gson gson = new Gson();
 		Gson gson = createGson();
 
 		String jsonString = gson.toJson(fixture);
+		Files.writeString(file.toPath(), jsonString, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -63,9 +74,11 @@ public class FixtureLibrary {
 	public void loadAllFixtures() throws IOException {
 		this.fixtures.clear();
 
+		LOGGER.info("load all fixture files from: {}", getFixtureDirPath().toFile().getAbsolutePath());
+
 		Files.find(getFixtureDirPath(),
 						Integer.MAX_VALUE,
-						(filePath, fileAttr) -> fileAttr.isRegularFile() && filePath.endsWith(".fixture"))
+						(filePath, fileAttr) -> fileAttr.isRegularFile() && filePath.toFile().getName().endsWith(".fixture"))
 				.forEach(path -> {
 					try {
 						loadFixtureInternal(path);
@@ -99,6 +112,21 @@ public class FixtureLibrary {
 	}
 
 	/**
+	 * count all loaded fixtures.
+	 *
+	 * @return number of loaded fixtures
+	 */
+	public int countLoadedFixtures() {
+		int i = 0;
+
+		for (Map.Entry<String,List<FixtureLibEntry>> entry : this.fixtures.entrySet()) {
+			i += entry.getValue().size();
+		}
+
+		return i;
+	}
+
+	/**
 	 * create Gson instance.
 	 *
 	 * @return gson instance
@@ -113,7 +141,7 @@ public class FixtureLibrary {
 	 *
 	 * @return directory with all fixture files
 	 */
-	private Path getFixtureDirPath() {
+	public Path getFixtureDirPath() {
 		String dirPath = "data/fixtures";
 
 		if (System.getProperty(DIR_PROPERTY_KEY) != null) {

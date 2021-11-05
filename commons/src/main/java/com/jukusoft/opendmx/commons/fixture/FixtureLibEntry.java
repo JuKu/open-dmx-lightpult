@@ -1,5 +1,7 @@
 package com.jukusoft.opendmx.commons.fixture;
 
+import java.util.Map;
+
 /*
  * an entry for the fixture library (entry means one spot, dimmer or one moving head).
  *
@@ -23,9 +25,21 @@ public class FixtureLibEntry {
 	private String manufacturer;
 
 	/**
+	 * modes of headlight.
+	 */
+	private Map<String,DMXChannel> modes;
+
+	/**
 	 * the dmx channels.
 	 */
 	private DMXChannel[] dmxChannels;
+
+	/**
+	 * the count of the heads (a headlight can be a multihead, this means it can e.q. has 4 heads).
+	 */
+	private int headCount = 1;
+
+	// TODO: add palettes
 
 	/**
 	 * default constructor.
