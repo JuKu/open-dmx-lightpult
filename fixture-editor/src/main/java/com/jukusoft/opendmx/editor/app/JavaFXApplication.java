@@ -30,7 +30,7 @@ public class JavaFXApplication extends Application {
         this.stage = stage;//new Stage();
 
         //set title, width and height
-        this.stage.setTitle("Preis Kalkulator");
+        this.stage.setTitle("Fixture Editor");
 
         // load fxml file
         try {

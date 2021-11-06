@@ -25,7 +25,9 @@ public class WindowController implements Initializable {
      */
     public void init(Stage stage, Scene scene, Pane pane) {
         //Objects.requireNonNull(calcButton);
-        //Objects.requireNonNull(warningLabel);
+        Objects.requireNonNull(versionLabel);
+
+		refreshVersion();
 
 		//TODO: add code here
     }
