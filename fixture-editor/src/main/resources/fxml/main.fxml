@@ -47,17 +47,17 @@
       <menus>
         <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem fx:id="newFixtureMenuItem" mnemonicParsing="false" onAction="#newFixture" text="New" />
+            <MenuItem fx:id="openFixtureMenuItem" mnemonicParsing="false" onAction="#openFixtureDialog" text="Open…" />
+            <MenuItem fx:id="saveFixtureMenuItem" mnemonicParsing="false" onAction="#saveFixtureDialog" text="Save" />
+            <MenuItem fx:id="saveAsFixtureMenuItem" mnemonicParsing="false" onAction="#saveAsFixtureDialog" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="closeApplicationMenuItem" mnemonicParsing="false" onAction="#closeApplication" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem fx:id="helpMenu" mnemonicParsing="false" text="About" />
+            <MenuItem fx:id="aboutMenu" mnemonicParsing="false" onAction="#showAboutDialog" text="About" />
           </items>
         </Menu>
       </menus>

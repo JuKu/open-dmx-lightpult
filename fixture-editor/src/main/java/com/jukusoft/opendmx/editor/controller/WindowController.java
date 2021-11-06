@@ -43,4 +43,46 @@ public class WindowController implements Initializable {
         versionLabel.setText("Version: " + version.getVersionName() + " Build: " + version.getBuildNumber() + " Build Time: " + version.getBuildTime());
     }
 
+	/**
+	 * create a new fixture - this method is called from the menu.
+	 */
+	public void newFixture() {
+		// TODO: add code here
+	}
+
+	/**
+	 * open a fixture file - this method is called from the menu.
+	 */
+	public void openFixtureDialog() {
+		//
+	}
+
+	/**
+	 * save a fixture file - this method is called from the menu.
+	 */
+	public void saveFixtureDialog() {
+		//
+	}
+
+	/**
+	 * save as fixture file - this method is called from the menu.
+	 */
+	public void saveAsFixtureDialog() {
+		//
+	}
+
+	/**
+	 * close the application - this method is called from the menu.
+	 */
+	public void closeApplication() {
+		System.exit(0);
+	}
+
+	/**
+	 * show the about dialog - this method is called from the menu.
+	 */
+	public void showAboutDialog(){
+		//TODO: add code here
+	}
+
 }
