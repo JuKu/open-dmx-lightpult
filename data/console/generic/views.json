@@ -1,0 +1,50 @@
+{
+  "position": {
+    "title": "Position",
+    "description": "Pan / Tilt and so on"
+  },
+  "dim_shut": {
+    "title": "Dimmer / Shutter",
+    "description": "Dimmer and Shutter"
+  },
+  "color": {
+    "title": "Color",
+    "description": "Color rad, CMY / HIS / RGB(A)(W) and so on"
+  },
+  "zoom": {
+    "title": "Zoom / Iris / Focus",
+    "description": "Zoom, Iris, Focus and so on"
+  },
+  "gobo1": {
+    "title": "Gobo",
+    "descirption": "Gobo rad, rotation and so on"
+  },
+  "gobo2": {
+    "title": "Gobo",
+    "descirption": "Gobo rad, rotation and so on"
+  },
+  "gobo3": {
+    "title": "Gobo",
+    "descirption": "Gobo rad, rotation and so on"
+  },
+  "gobo4": {
+    "title": "Gobo",
+    "descirption": "Gobo rad, rotation and so on"
+  },
+  "prism": {
+    "title": "Prism configuration",
+    "description": "Prism configuration"
+  },
+  "speed": {
+    "title": "Speed",
+    "description": "Speed"
+  },
+  "extra": {
+    "title": "Extra options",
+    "descirption": "Extra options"
+  },
+  "control": {
+    "title": "Control",
+    "description": "Control, e.q. turn the lamp on"
+  }
+}
