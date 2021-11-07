@@ -17,19 +17,19 @@
   },
   "gobo1": {
     "title": "Gobo",
-    "descirption": "Gobo rad, rotation and so on"
+    "description": "Gobo rad, rotation and so on"
   },
   "gobo2": {
     "title": "Gobo",
-    "descirption": "Gobo rad, rotation and so on"
+    "description": "Gobo rad, rotation and so on"
   },
   "gobo3": {
     "title": "Gobo",
-    "descirption": "Gobo rad, rotation and so on"
+    "description": "Gobo rad, rotation and so on"
   },
   "gobo4": {
     "title": "Gobo",
-    "descirption": "Gobo rad, rotation and so on"
+    "description": "Gobo rad, rotation and so on"
   },
   "prism": {
     "title": "Prism configuration",
@@ -41,7 +41,7 @@
   },
   "extra": {
     "title": "Extra options",
-    "descirption": "Extra options"
+    "description": "Extra options"
   },
   "control": {
     "title": "Control",

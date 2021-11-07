@@ -23,4 +23,14 @@ public class Dirs {
         }
     }
 
+    /**
+     * override the data dir path.
+     * For junit test purposes only.
+     *
+     * @param newDir path to data dir
+     */
+    public static void overrideDataDir(String newDir) {
+        DATA = newDir;
+    }
+
 }
