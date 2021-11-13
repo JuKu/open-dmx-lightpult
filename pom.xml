@@ -18,6 +18,7 @@
     <modules>
         <module>commons</module>
         <module>fixture-editor</module>
+        <module>dmx-outputs</module>
     </modules>
 
     <name>open-dmx-lightpult</name>
