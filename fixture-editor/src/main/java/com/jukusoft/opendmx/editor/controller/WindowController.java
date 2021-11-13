@@ -144,7 +144,20 @@ public class WindowController implements Initializable {
 	 * open a fixture file - this method is called from the menu.
 	 */
 	public void openFixtureDialog() {
-		//
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choose path for fixture file");
+		fileChooser.setInitialDirectory(new File(Dirs.DATA + "fixtures/"));
+
+		//Set extension filter for text files
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fixture files (*.fixture)", "*.fixture");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		//Show save file dialog
+		File file = fileChooser.showOpenDialog(this.mainStage);
+
+		if (file != null) {
+			openFixture(file);
+		}
 	}
 
 	/**
