@@ -6,12 +6,10 @@ import com.jukusoft.opendmx.commons.utils.Dirs;
 import com.jukusoft.opendmx.editor.utils.DialogUtils;
 import com.jukusoft.opendmx.editor.utils.Version;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,6 +22,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class WindowController implements Initializable {
+
+	/**
+	 * the path to the FXML file for the single tab entry.
+	 */
+	private static final String TAB_FXML_PATH = "fxml/tab.fxml";
 
     @FXML
     protected Label versionLabel;
@@ -87,9 +90,41 @@ public class WindowController implements Initializable {
 		if (file != null) {
 			FixtureLibEntry fixture = new FixtureLibEntry("", "", "");
 
-			//TODO: store path and create new file
+			//store path and create new file
 			saveFixture(file, fixture);
+			openFixture(file);
 		}
+	}
+
+	/**
+	 * open a fixture file.
+	 *
+	 * @param file path to the .fixture file
+	 */
+	public void openFixture(File file) {
+		Tab tab = new Tab(file.getName().replace(".fixture", ""));
+
+		ClassLoader classLoader = Version.class.getClassLoader();
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(classLoader.getResource(TAB_FXML_PATH));
+
+		//create and set controller
+		TabController tabController = new TabController();
+		loader.setController(tabController);
+
+		//load and get root pane (AnchorPane)
+		try {
+			Pane rootPane = loader.load();
+			tab.setContent(rootPane);
+
+			//initialize controller
+			tabController.init(this.mainStage, tab, rootPane);
+		} catch (Exception e) {
+			DialogUtils.showExceptionDialog("Internal Error!", "An exception occured while loading .fxml file.", "file to load: " + TAB_FXML_PATH, e);
+		}
+
+		this.tabPane.getTabs().add(tab);
 	}
 
 	/**
