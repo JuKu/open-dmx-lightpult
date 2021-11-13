@@ -48,8 +48,8 @@ public class FixturePropertyRow {
 	 * @param currentValue right column value
 	 * @param dataType data type of the value
 	 */
-	public FixturePropertyRow(String title, String currentValue, DataType dataType) {
-		this(title, currentValue, dataType, false);
+	public FixturePropertyRow(String title, String currentValue, DataType dataType, Consumer<String> valueObserver) {
+		this(title, currentValue, dataType, valueObserver, false);
 	}
 
 	/**
@@ -60,10 +60,11 @@ public class FixturePropertyRow {
 	 * @param dataType data type of the value
 	 * @param emptyValueAllowed a flag, if empty values are allowed
 	 */
-	public FixturePropertyRow(String title, String currentValue, DataType dataType, boolean emptyValueAllowed) {
+	public FixturePropertyRow(String title, String currentValue, DataType dataType, Consumer<String> valueObserver, boolean emptyValueAllowed) {
 		this.title = title;
 		this.textField = new TextField(currentValue);
 		this.dataType = dataType;
+		this.setValueObserver(valueObserver);
 		this.emptyValueAllowed = emptyValueAllowed;
 	}
 

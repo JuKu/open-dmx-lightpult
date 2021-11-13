@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 /*
  * The JavaFX controller for a single fixture tab in the TabPane (see also {@link WindowController}).
@@ -80,16 +81,28 @@ public class TabController implements Initializable {
 
 		this.fixtureLabel.setText("Fixture Path: " + file.getName());
 
-		propertyRows.add(new FixturePropertyRow("Short Name:", fixture.getShortName(), FixturePropertyRow.DataType.STRING));
-		propertyRows.add(new FixturePropertyRow("Long Name:", fixture.getLongName(), FixturePropertyRow.DataType.STRING));
-		propertyRows.add(new FixturePropertyRow("Manufacturer:", fixture.getManufacturer(), FixturePropertyRow.DataType.STRING));
-		propertyRows.add(new FixturePropertyRow("DMX Modes:", fixture.getModes().size() + "", FixturePropertyRow.DataType.INTEGER));
+		propertyRows.add(new FixturePropertyRow("Short Name:", fixture.getShortName(), FixturePropertyRow.DataType.STRING, newValue -> {
+			this.fixture.setShortName(newValue);
+			trackUnsavedChanges();
+		}));
+		propertyRows.add(new FixturePropertyRow("Long Name:", fixture.getLongName(), FixturePropertyRow.DataType.STRING, newValue -> {
+			fixture.setLongName(newValue);
+			trackUnsavedChanges();
+		}));
+		propertyRows.add(new FixturePropertyRow("Manufacturer:", fixture.getManufacturer(), FixturePropertyRow.DataType.STRING, newValue -> {
+			fixture.setManufacturer(newValue);
+			trackUnsavedChanges();
+		}));
+		propertyRows.add(new FixturePropertyRow("DMX Modes:", fixture.getModes().size() + "", FixturePropertyRow.DataType.INTEGER, newValue -> {
+			//TODO: add code here
+			trackUnsavedChanges();
+		}));
 
 		for (int row = 0; row < propertyRows.size(); row++) {
 			gridPane.addRow(row + 1, propertyRows.get(row).getTitleLabel(), propertyRows.get(row).getTextField());
 
 			//set listener to track unsaved changes
-			propertyRows.get(row).setValueObserver(newValue -> trackUnsavedChanges());
+			//propertyRows.get(row).setValueObserver(newValue -> trackUnsavedChanges());
 		}
 
 		//set max height of all rows

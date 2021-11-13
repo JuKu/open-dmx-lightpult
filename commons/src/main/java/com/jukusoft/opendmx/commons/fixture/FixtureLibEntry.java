@@ -49,12 +49,24 @@ public class FixtureLibEntry {
 		return shortName;
 	}
 
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
 	public String getLongName() {
 		return longName;
 	}
 
+	public void setLongName(String longName) {
+		this.longName = longName;
+	}
+
 	public String getManufacturer() {
 		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 
 	public Map<String, FixtureMode> getModes() {
