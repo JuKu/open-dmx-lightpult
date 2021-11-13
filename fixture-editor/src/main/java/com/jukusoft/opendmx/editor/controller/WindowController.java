@@ -44,6 +44,11 @@ public class WindowController implements Initializable {
 	 */
 	private Stage mainStage;
 
+	/**
+	 * the fixture library.
+	 */
+	private FixtureLibrary fixtureLibrary = new FixtureLibrary();
+
     /**
      * initialize window, will be called after loading fxml file
      */
@@ -103,6 +108,14 @@ public class WindowController implements Initializable {
 	 */
 	public void openFixture(File file) {
 		Tab tab = new Tab(file.getName().replace(".fixture", ""));
+		FixtureLibEntry fixture = null;
+
+		//load fixture
+		try {
+			fixture = fixtureLibrary.loadFromFile(file);
+		} catch (IOException e) {
+			DialogUtils.showExceptionDialog("Error!", "An exception occured while open fixture file.", "file to load: " + file.getAbsolutePath(), e);
+		}
 
 		ClassLoader classLoader = Version.class.getClassLoader();
 
@@ -119,7 +132,7 @@ public class WindowController implements Initializable {
 			tab.setContent(rootPane);
 
 			//initialize controller
-			tabController.init(this.mainStage, tab, rootPane);
+			tabController.init(this.mainStage, tab, rootPane, file, fixture);
 		} catch (Exception e) {
 			DialogUtils.showExceptionDialog("Internal Error!", "An exception occured while loading .fxml file.", "file to load: " + TAB_FXML_PATH, e);
 		}
