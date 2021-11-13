@@ -39,6 +39,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -51,8 +52,12 @@
           <items>
             <MenuItem fx:id="newFixtureMenuItem" mnemonicParsing="false" onAction="#newFixture" text="New" />
             <MenuItem fx:id="openFixtureMenuItem" mnemonicParsing="false" onAction="#openFixtureDialog" text="Open…" />
-            <MenuItem fx:id="saveFixtureMenuItem" mnemonicParsing="false" onAction="#saveFixtureDialog" text="Save" />
+            <MenuItem fx:id="saveFixtureMenuItem" mnemonicParsing="false" onAction="#saveFixtureDialog" text="Save">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <MenuItem fx:id="saveAsFixtureMenuItem" mnemonicParsing="false" onAction="#saveAsFixtureDialog" text="Save As…" />
+                  <MenuItem fx:id="saveAllFixturesMenuItem" mnemonicParsing="false" onAction="#saveAllFixturesDialog" text="Save All" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="closeApplicationMenuItem" mnemonicParsing="false" onAction="#closeApplication" text="Quit" />
           </items>

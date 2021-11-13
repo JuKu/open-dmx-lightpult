@@ -18,9 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for the JavaFX main window.
+ */
 public class WindowController implements Initializable {
 
 	/**
@@ -48,6 +53,11 @@ public class WindowController implements Initializable {
 	 * the fixture library.
 	 */
 	private FixtureLibrary fixtureLibrary = new FixtureLibrary();
+
+	/**
+	 * a list with all open tabs.
+	 */
+	private List<TabController> tabs = new ArrayList<>();
 
     /**
      * initialize window, will be called after loading fxml file
@@ -137,7 +147,14 @@ public class WindowController implements Initializable {
 			DialogUtils.showExceptionDialog("Internal Error!", "An exception occured while loading .fxml file.", "file to load: " + TAB_FXML_PATH, e);
 		}
 
+		// remove current tab from list, if the tab is closed
+		tab.setOnClosed(event -> tabs.remove(tab));
+
+		this.tabs.add(tabController);
 		this.tabPane.getTabs().add(tab);
+
+		//select new tab
+		this.tabPane.getSelectionModel().selectLast();
 	}
 
 	/**
@@ -164,7 +181,20 @@ public class WindowController implements Initializable {
 	 * save a fixture file - this method is called from the menu.
 	 */
 	public void saveFixtureDialog() {
-		//Show save file dialog
+		//get current selected tab
+		int i = this.tabPane.getSelectionModel().getSelectedIndex();
+
+		//save the selected tab
+		this.tabs.get(i).save();
+	}
+
+	/**
+	 * save all fixtures - called from MenuItem.
+	 */
+	public void saveAllFixturesDialog() {
+		for (TabController controller : tabs) {
+			controller.save();
+		}
 	}
 
 	protected void saveFixture(File file, FixtureLibEntry fixture) {

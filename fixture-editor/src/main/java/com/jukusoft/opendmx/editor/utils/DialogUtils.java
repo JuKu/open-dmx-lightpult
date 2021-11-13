@@ -24,6 +24,22 @@ public class DialogUtils {
 	}
 
 	/**
+	 * show a warning dialog.
+	 *
+	 * @param title title of the dialog
+	 * @param headerText header text of the dialog
+	 * @param content content of the dialog
+	 */
+	public static void showWarningDialog(String title, String headerText, String content) {
+		Alert alert = new Alert(Alert.AlertType.WARNING);
+		alert.setTitle(title);
+		alert.setHeaderText(headerText);
+		alert.setContentText(content);
+
+		alert.showAndWait();
+	}
+
+	/**
 	 * this methods creates and opens an exception dialog.
 	 *
 	 * @param title title of the dialog

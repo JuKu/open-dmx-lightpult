@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /*
- *
+ * This controller adds support for Art-Net nodes and represents a single Art-Net node.
  *
  * @author Justin Kuenzel
  */
