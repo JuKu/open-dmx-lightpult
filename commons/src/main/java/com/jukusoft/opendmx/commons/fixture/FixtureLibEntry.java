@@ -1,5 +1,6 @@
 package com.jukusoft.opendmx.commons.fixture;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -27,7 +28,7 @@ public class FixtureLibEntry {
 	/**
 	 * modes of headlight.
 	 */
-	private Map<String,FixtureMode> modes;
+	private Map<String,FixtureMode> modes = new HashMap<>();
 
 	// TODO: add palettes
 
@@ -57,6 +58,10 @@ public class FixtureLibEntry {
 	}
 
 	public Map<String, FixtureMode> getModes() {
+		if (modes == null) {
+			this.modes = new HashMap<>();
+		}
+
 		return modes;
 	}
 
