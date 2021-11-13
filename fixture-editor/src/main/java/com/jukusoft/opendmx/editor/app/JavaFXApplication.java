@@ -5,6 +5,7 @@ import com.jukusoft.opendmx.editor.utils.Version;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -31,6 +32,9 @@ public class JavaFXApplication extends Application {
 
         //set title, width and height
         this.stage.setTitle("Fixture Editor");
+
+		//set editor icon
+		this.stage.getIcons().add(new Image(JavaFXApplication.class.getResourceAsStream("/assets/icons/app_icon.png")));
 
         // load fxml file
         try {
