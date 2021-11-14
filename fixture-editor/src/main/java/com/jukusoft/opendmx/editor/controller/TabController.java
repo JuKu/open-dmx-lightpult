@@ -113,6 +113,13 @@ public class TabController implements Initializable {
 			trackUnsavedChanges();
 		}));
 
+		//one mode is required, so we add one, if no one exists
+		/*if (this.modesCount == 0) {
+			this.modesCount = 1;
+		}*/
+
+		refreshModesTabs();
+
 		for (int row = 0; row < propertyRows.size(); row++) {
 			gridPane.addRow(row + 1, propertyRows.get(row).getTitleLabel(), propertyRows.get(row).getTextField());
 

@@ -29,7 +29,7 @@ public class ModesCountPropertyRow extends FixturePropertyRow {
 		this.spinner.setEditable(true);
 
 		//create new value factory
-		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, currentValue);
+		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, currentValue);
 		this.spinner.setValueFactory(valueFactory);
 
 		this.spinner.getValueFactory().setValue(currentValue);
