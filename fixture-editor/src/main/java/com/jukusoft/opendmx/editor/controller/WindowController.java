@@ -181,6 +181,11 @@ public class WindowController implements Initializable {
 	 * save a fixture file - this method is called from the menu.
 	 */
 	public void saveFixtureDialog() {
+		//skip if no tab is available
+		if (this.tabPane.getTabs().size() == 0) {
+			return;
+		}
+
 		//get current selected tab
 		int i = this.tabPane.getSelectionModel().getSelectedIndex();
 

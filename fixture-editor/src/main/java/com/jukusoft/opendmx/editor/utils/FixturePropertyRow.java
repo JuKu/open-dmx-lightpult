@@ -1,6 +1,7 @@
 package com.jukusoft.opendmx.editor.utils;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -72,7 +73,7 @@ public class FixturePropertyRow {
 		return new Label(title);
 	}
 
-	public TextField getTextField() {
+	public Control getTextField() {
 		return textField;
 	}
 

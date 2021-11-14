@@ -4,13 +4,12 @@ import com.jukusoft.opendmx.commons.fixture.FixtureLibEntry;
 import com.jukusoft.opendmx.commons.fixture.FixtureLibrary;
 import com.jukusoft.opendmx.editor.utils.DialogUtils;
 import com.jukusoft.opendmx.editor.utils.FixturePropertyRow;
+import com.jukusoft.opendmx.editor.utils.ModesCountPropertyRow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
 
 /*
  * The JavaFX controller for a single fixture tab in the TabPane (see also {@link WindowController}).
@@ -37,6 +35,9 @@ public class TabController implements Initializable {
 
 	@FXML
 	protected GridPane gridPane;
+
+	@FXML
+	protected TabPane modesTabPane;
 
 	/**
 	 * this flag is set, if there are unsaved changes.
@@ -63,6 +64,11 @@ public class TabController implements Initializable {
 	 */
 	private List<FixturePropertyRow> propertyRows = new ArrayList<>();
 
+	/**
+	 * the number of modes for this fixture (default: 1).
+	 */
+	private int modesCount = 0;
+
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		//
@@ -74,10 +80,12 @@ public class TabController implements Initializable {
 	public void init(Stage stage, Tab tab, Pane pane, File file, FixtureLibEntry fixture) {
 		Objects.requireNonNull(fixtureLabel);
 		Objects.requireNonNull(gridPane);
+		Objects.requireNonNull(modesTabPane);
 
 		this.currentTab = tab;
 		this.fixture = fixture;
 		this.currentFile = file;
+		this.modesCount = fixture.getModes().size();
 
 		this.fixtureLabel.setText("Fixture Path: " + file.getName());
 
@@ -93,8 +101,15 @@ public class TabController implements Initializable {
 			fixture.setManufacturer(newValue);
 			trackUnsavedChanges();
 		}));
-		propertyRows.add(new FixturePropertyRow("DMX Modes:", fixture.getModes().size() + "", FixturePropertyRow.DataType.INTEGER, newValue -> {
-			//TODO: add code here
+		propertyRows.add(new ModesCountPropertyRow("DMX Modes:", fixture.getModes().size(), FixturePropertyRow.DataType.INTEGER, newValue -> {
+			if (newValue == null || newValue.isEmpty()) {
+				//skip empty values
+				return;
+			}
+
+			this.modesCount = Integer.parseInt(newValue);
+			refreshModesTabs();
+
 			trackUnsavedChanges();
 		}));
 
@@ -109,6 +124,9 @@ public class TabController implements Initializable {
 		for (RowConstraints rowConstraints : gridPane.getRowConstraints()) {
 			rowConstraints.setMaxHeight(30);
 		}
+
+		//remove all tabs from modes tabs
+		this.modesTabPane.getTabs().clear();
 	}
 
 	public void save() {
@@ -130,6 +148,27 @@ public class TabController implements Initializable {
 
 		this.unsavedChanges = false;
 		refreshTabTitle();
+	}
+
+	/**
+	 * refresh the tabs in the modesTabPanel.
+	 */
+	protected void refreshModesTabs() {
+		//remove too much tabs
+		while (this.modesCount < modesTabPane.getTabs().size()) {
+			//remove last tab
+			modesTabPane.getTabs().remove(modesTabPane.getTabs().size() - 1);
+		}
+
+		int index = this.modesCount;
+
+		//add new tabs
+		while (this.modesCount > modesTabPane.getTabs().size()) {
+			//add new tab
+			modesTabPane.getTabs().add(new Tab("Mode " + index));
+
+			index++;
+		}
 	}
 
 	protected void trackUnsavedChanges() {
